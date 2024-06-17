@@ -1,0 +1,52 @@
+<MyLayout>
+
+    id: widget_layout
+    BoxLayout:
+
+        orientation: "vertical"
+        size: root.width, root.height
+        padding: 20
+
+        #Placeholder For: Settings Home and About
+        GridLayout:
+            cols: 3
+            size_hint: 1, .1
+
+            Button:
+                id: settingsButton
+                text: " "
+
+            Button:
+                id: homeButton
+                text: " "
+
+            Button:
+                id: aboutButton
+                text: " "
+
+        FileChooserIconView: 
+            id: filechooser
+            multiselect: True
+            filters: ['*.pdf', '*.PDF']
+            on_selection: widget_layout.selected(filechooser.selection)
+
+        GridLayout:
+            cols:3
+            size_hint: 1, .15
+
+            Button:
+                id: addSelection
+                text: "Add"
+                on_release: root.selection_button_pressed(filechooser.selection)
+
+            Button:
+                id: finishSelection
+                text: "Merge"
+                on_release: root.merge_button_pressed(filechooser.selection)
+
+            Button:
+                id: cancelSelection
+                text: "Cancel"
+                on_release: 
+                    root.cancel_button_pressed()
+
